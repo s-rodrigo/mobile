@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="theme-color" content="#346ca9" />
+		<title>mobile</title>
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="./css/custom.css">
+	</head>
+	<body>
+		<div class="menu-top">
+			<div>
+				<a href="#" onclick="openNav('myMenu')"><i class="fa fa-bars"></i></a>
+			</div>
+			<div>
+				<img src="./img/logo.svg">
+			</div>
+			<div>
+				<a href="#" onclick="openNav('mySidenav')"><i class="fa fa-search"></i></a>
+			</div>
+		</div>
+
+		<!--<div class="divider-menu"></div>-->
+		<div class="container-body">
+			<form>
+				<div class="form-group">
+			    <label for="exampleFormControlInput1">Nome completo</label>
+			    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Seu nome completo">
+			  </div>
+			  <div class="form-group">
+			    <label for="exampleFormControlInput1">Email</label>
+			    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="seu@email.com">
+			  </div>
+			  <div class="form-group">
+			    <label for="exampleFormControlSelect1">Assunto</label>
+			    <select class="form-control" id="exampleFormControlSelect1">
+			      <option>Dúvidas</option>
+			      <option>Reclamações</option>
+			      <option>Sugestões</option>
+			    </select>
+			  </div>
+			  <div class="form-group">
+			    <label for="exampleFormControlTextarea1">Mensagem</label>
+			    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+			  </div>
+
+				<button type="submit" class="btn btn-primary btn-block">Enviar</button>
+			</form>
+		</div>
+
+		<!--<div class="menu-bottom">
+			<div>
+				<a href="/index.html"><i class="fa fa-home"></i></a>
+			</div>
+			<div>
+				<a href="#" onclick="openNav('myMenu')"><i class="fa fa-bars"></i></a>
+			</div>
+			<div>
+				<a href="#" onclick="openNav('mySidenav')"><i class="fa fa-search"></i></a>
+			</div>
+		</div>-->
+
+		<div id="mySidenav" class="sidenav">
+			<div style="padding: 1.5rem;">
+				<form>
+				  	<div class="form-group">
+				    	<label for="exampleInputEmail1">Cargo</label>
+				    	<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ex: Administrador">
+				  	</div>
+				  	<div class="form-group">
+				    	<label for="exampleInputEmail1">Cidade</label>
+				    	<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ex: Campinas">
+				  	</div>
+					<button type="submit" class="btn btn-primary btn-block"> <i class="fa fa-search"></i> Buscar</button>
+					<button type="submit" class="btn btn-secondary btn-block"> <i class="fas fa-times"></i> Fechar busca</button>
+				</form>
+			</div>
+		</div>
+
+		<div id="myMenu" class="sidemenu">
+		  <a href="/index.html">Inicio</a>
+		  <a href="/vagas.html">Vagas</a>
+		  <a href="#">Empresas</a>
+		  <a href="/contato.html">Contato</a>
+		</div>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<script>
+		function openNav(id) {
+			var idElement = document.getElementById(id).style.width;
+
+			if(id == 'mySidenav') {
+				if(idElement == '0px' || idElement == '') {
+					document.getElementById(id).style.width = '100%';
+					document.getElementById("myMenu").style.width = '0';
+				} else document.getElementById(id).style.width = '0';
+			} else {
+				if(idElement == '0px' || idElement == '') {
+					document.getElementById(id).style.width = '250px';
+					document.getElementById("mySidenav").style.width = '0';
+				} else document.getElementById(id).style.width = '0';
+			}
+		}
+	</script>
+	</body>
+</html>
