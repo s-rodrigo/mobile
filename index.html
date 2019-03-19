@@ -7,6 +7,15 @@
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 		<link rel="stylesheet" type="text/css" href="./css/custom.css">
+		<style media="screen">
+			a {color: inherit;}
+			a:link, a:visited, a:hover, a:active {color: #fff;}
+			body {background: url(../img/pattern_2.svg) center center fixed #004dda;}
+			.text-header span {
+		    color: #f5c018;
+		    font-weight: 900;
+			}
+		</style>
 	</head>
 	<body>
 		<div class="menu-top">
@@ -14,29 +23,53 @@
 				<a href="#" onclick="openNav('myMenu')"><i class="fa fa-bars"></i></a>
 			</div>
 			<div>
-				<img src="./img/logo.svg">
+				<img src="./img/logo.png">
 			</div>
 			<div>
 				<!--<a href="#" onclick="openNav('mySidenav')"><i class="fa fa-search"></i></a>-->
 			</div>
 		</div>
 
-		<div class="container-body">
-			inicio
+		<div>
+			<section class="hero_single version_5">
+				<div class="wrapper">
+					<div class="container">
+						<div class="row justify-content-center text-header pt-lg-5">
+							<div class="col-xl-5 col-lg-6">
+								<h3>Procurar emprego</h3>
+								<p>SE VOCÊ <span>QUER</span>, VOCÊ <span>PODE</span>, VOCÊ <span>CONSEGUE</span>!</p>
+								<form method="post" action="grid-listings-filterscol.html">
+									<div class="custom-search-input-2">
+										<div class="form-group">
+											<input class="form-control" type="text" placeholder="Ex. Administrativo">
+											<i class="fa fa-search"></i>
+										</div>
+										<div class="form-group">
+											<select class="form-control">
+											  <option selected>Open this select menu</option>
+											  <option value="1">One</option>
+											  <option value="2">Two</option>
+											  <option value="3">Three</option>
+											</select>
+										</div>
+										<input type="submit" value="Buscar">
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div style="padding: 60px 10px 10px 20px;">
+						<h5>Últimas vagas procuradas:</h5>
+						<ul>
+							<li><a href="#">Operador de produção, Campinas/SP</a></li>
+							<li><a href="#">Nutricionista, Valinhos/SP</a></li>
+							<li><a href="#">Engenheiro Civil, Santa Barbara D"Oeste/SP</a></li>
+						</ul>
+					</div>
+				</div>
+			</section>
 		</div>
-	</div>
 
-		<!--<div class="menu-bottom">
-			<div>
-				<a href="/index.html"><i class="fa fa-home"></i></a>
-			</div>
-			<div>
-				<a href="#" onclick="openNav('myMenu')"><i class="fa fa-bars"></i></a>
-			</div>
-			<div>
-				<a href="#" onclick="openNav('mySidenav')"><i class="fa fa-search"></i></a>
-			</div>
-		</div>-->
 
 		<div id="mySidenav" class="sidenav">
 			<div style="padding: 1.5rem;">
@@ -50,7 +83,6 @@
 				    	<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ex: Campinas">
 				  	</div>
 					<button type="submit" class="btn btn-primary btn-block"> <i class="fa fa-search"></i> Buscar</button>
-					<button type="submit" class="btn btn-secondary btn-block"> <i class="fas fa-times"></i> Fechar busca</button>
 				</form>
 			</div>
 		</div>
