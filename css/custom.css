@@ -49,7 +49,7 @@ body {
 }
 
 .container-body {
-  padding: 15px 10px 50px 10px;
+  padding: 15px 10px 10px 10px;
 }
 
 .menu-top {
@@ -105,7 +105,7 @@ body {
 }
 
 .divider {
-  margin-bottom: 10px;
+  margin-bottom: 25px;
 }
 
 .divider-menu {
@@ -493,4 +493,89 @@ select {
     padding-left: 15px;
     border-right: 1px solid #d2d8dd;
     font-weight: 500;
+}
+
+/* VAGA */
+
+.detail-job h1 {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.detail-job p {
+  font-size: 15px;
+  text-align: justify;
+  margin-bottom: 20px;
+}
+
+.detail-job h5 {
+  font-size: 1.15rem;
+}
+
+.detail-job h2 {
+  font-size: 1.0rem;
+}
+
+.detail-job h3 {
+  font-size: 0.87rem;
+  text-align: right;
+  margin: -10px 0px 10px 0;
+}
+
+.socials ul {
+  list-style-type: none;
+  text-align: center;
+}
+
+.socials{
+  display: flex;
+  justify-content: space-around;
+  font-size: 24px;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+.socials div {
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  border-radius: 55px;
+  color: #fff;
+}
+
+.icon-face {
+  background-color: #3b5998;
+}
+
+.icon-insta {
+  background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+}
+
+.icon-link {
+  background-color: #3577b5;
+}
+
+.icon-twit {
+  background-color: #4faded;
+}
+
+.alert h4 {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.alert hr {
+  margin: 10px 0px 10px 0px;
+}
+
+.alert p {
+  margin-bottom: 0px;
+}
+
+.pcd {
+  background-color: #3676ad;
+  color: #fff;
+  text-align: center;
+  padding: 3px;
+  border-radius: 10px;
 }
