@@ -1,0 +1,32 @@
+<div class="menu-top">
+    <div id="openMenu">
+        <a id="openMenu" onclick="openNav('myMenu')">
+            <i class="fa fa-bars" id="openMenu"></i>
+        </a>
+    </div>
+    <div>
+        <a href="/"><img src="./img/logo.png"></a>
+    </div>
+    <div id="openSearch">
+        <a id="openSearch" class="btn-search" onclick="openNav('mySidenav')">
+            <i class="fa fa-search" id="openSearch"></i>
+        </a>
+    </div>
+</div>
+
+<div id="mySidenav" class="sidenav">
+    <div style="padding: 1.5rem;">
+
+        <!-- FORM SEARCH-->
+        <%- include vaga-form.ejs %>
+    </div>
+</div>
+
+<div id="myMenu" class="sidemenu">
+    <div style="padding-top: 45px;">
+        <a href="/">Inicio</a>
+        <a href="/empregos">Vagas</a>
+        <a href="#">Empresas</a>
+        <a href="/contato">Contato</a>
+    </div>
+</div>
