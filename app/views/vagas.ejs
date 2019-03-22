@@ -22,32 +22,34 @@
 			<div class="result">
 				<div class="result-text">
 					<h1>
-						Você buscou por <strong><%= query.vaga %></strong> 
-						em <strong><%= query.cidade %>/SP</strong>, 
-						retornando 120 Resultados.</h1>
+						<% if(query.vaga != '') { %> Você buscou por <strong><%= query.vaga %></strong> <% } %>
+						<% if(query.vaga == '') { %> <strong>Empregos</strong> <% } %>
+						em <strong><%= query.cidade == 'todas' ? 'Campinas e Região' : query.cidade %>/SP</strong>,
+						retornando <%= count %> Resultado<%= count > 1 ? 's' : '' %>.
+					</h1>
 				</div>
 			</div>
 
 			<div class="container-body">
 				<div class="listings-container compact-list-layout margin-top-35">
-					<% for(var i = 0; i < result.length; i++){ %>
+					<% for(var i = 0; i < data.length; i++){ %>
 					<a href="/vaga">
 						<div class="box">
 							<div class="favorite">
 								<div><i class="icon-color fab fa-accessible-icon"></i></div>
 							</div>
 							<div class="box-title">
-								<span><%= result[i].title %></span>
-								<p><i class="icon-color fa fa-map-marker-alt"></i> <%= result[i].city %> / SP</p>
+								<span><%= data[i].title %></span>
+								<p><i class="icon-color fa fa-map-marker-alt"></i> <%= data[i].city %>/SP</p>
 							</div>
 							<div class="box-description">
 								<span>How likely are you to recommend the Envato Market Lorem ipsum dolor sit Market Lorem ipsum dolor Market Lorem.</span>
 							</div>
 							<hr/>
 							<div class="box-description box-footer">
-								<div><i class="icon-color fa fa-user-alt"></i> 
-									<%= result[i].vacancies %> 
-									vaga<%= result[i].vacancies > 1 ? 's' : '' %></div>
+								<div><i class="icon-color fa fa-user-alt"></i>
+									<%= data[i].vacancies %>
+									vaga<%= data[i].vacancies > 1 ? 's' : '' %></div>
 								<div><i class="icon-color far fa-clock"></i> 5 dias atrás</div>
 							</div>
 						</div>
@@ -55,15 +57,42 @@
 					<% } %>
 
 					<div class="divider"></div>
-					<nav aria-label="Page navigation example">
-						<ul class="pagination pagination-sm justify-content-center">
-							<li class="page-item"><a class="page-link" href="#"><</a></li>
-							<li class="page-item"><a class="page-link" href="#">1</a></li>
-							<li class="page-item"><a class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item"><a class="page-link" href="#">></a></li>
-						</ul>
-					</nav>
+
+					<center>
+						<small><strong>Página <%= page %> de <%= sizePage %></strong></small>
+						<br/>
+						<div class="btn-group" role="group" aria-label="Basic example">
+						  <button type="button" class="btn btn-secondary <%= page == 1 ? 'disabled' : '' %>">
+								<a href="/empregos?vaga=<%= query.vaga %>&cidade=<%= query.cidade %>&page=<%= page-1 %>">
+									<i class="fas fa-chevron-left"></i> Anterior
+								</a>
+							</button>
+						  <button type="button" class="btn btn-secondary <%= page == sizePage ? 'disabled' : '' %>">
+								<a href="/empregos?vaga=<%= query.vaga %>&cidade=<%= query.cidade %>&page=<%= page+1 %>">
+									Proxíma <i class="fas fa-chevron-right"></i>
+								</a>
+							</button>
+						</div>
+					</center>
+
+					<!--<center>
+						<small><strong>Página <%= page %> de <%= sizePage %></strong></small>
+						<nav aria-label="Page navigation example">
+							<ul class="pagination pagination-sm justify-content-center">
+								<li class="page-item">
+									<a class="page-link" href="/empregos?vaga=<%= query.vaga %>&cidade=<%= query.cidade %>&page=1"> < </a>
+								</li>
+								<% for(let i = 0; i < pagination.length; i++){ %>
+								<li class="page-item <%= pagination[i].active ? 'active' : '' %>">
+									<a class="page-link" href="/empregos?vaga=<%= query.vaga %>&cidade=<%= query.cidade %>&page=<%= pagination[i].value %>"> <%= pagination[i].value %> </a>
+								</li>
+								<% } %>
+								<li class="page-item">
+									<a class="page-link" href="/empregos?vaga=<%= query.vaga %>&cidade=<%= query.cidade %>&page=<%= sizePage %>"> > </a>
+								</li>
+							</ul>
+						</nav>
+					</center>-->
 				</div>
 			</div>
 		</div>

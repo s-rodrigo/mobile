@@ -4,14 +4,9 @@ module.exports.vacancies = function(mobile, req, res){
     let dbName = mobile.config.mongodb.collection;
     let parameters = req.query;
 
-    mobile.config.mongodb.connection().then( client => {
-        let dao = new mobile.app.models.VacanciesDao(client, dbName, objectId);
+    mobile.config.mongodb.connection(parameters, function(result){
 
-        dao.filter(parameters, function(result){
-            let data = { query: parameters, result: result };
-            
-            res.render('vagas', data);
-        });
+        res.render('vagas', result);
     });
 }
 
