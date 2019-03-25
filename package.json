@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/s-rodrigo/mobile#readme",
   "dependencies": {
+    "compression": "^1.7.4",
     "consign": "^0.1.6",
     "dotenv": "^7.0.0",
     "ejs": "^2.6.1",

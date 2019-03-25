@@ -26,6 +26,7 @@ let connection = (parameters, callback) => {
           var page = 1;
 
           if(parameters.page) page = parameters.page;
+          if(parameters.page <= 0) page = 1;
           if(parameters.vaga != '') query.title = {$regex: '.*'+parameters.vaga+'.*', $options: 'i'};
           if(parameters.cidade != 'todas') query.city = parameters.cidade;
 
