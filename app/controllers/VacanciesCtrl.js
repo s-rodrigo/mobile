@@ -4,7 +4,7 @@ module.exports.vacancies = function(mobile, req, res){
     let dbName = mobile.config.mongodb.collection;
     let parameters = req.query;
 
-    mobile.config.mongodb.connection(parameters, function(result){
+    mobile.config.mongodb.connection(parameters, true, function(result){
 
         res.render('vagas', result);
     });

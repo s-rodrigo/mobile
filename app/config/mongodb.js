@@ -15,34 +15,34 @@ const url = 'mongodb://'+ userConn.user +':'+ userConn.password +'@ds047440.mlab
 const dbName = 'company-jobs';
 
 // Connectino with MLab
-let connection = (parameters, callback) => {
+let connection = (parameters, all, callback) => {
       MongoClient.connect(url, { useNewUrlParser: true }, function(err, client) {
           if(err) throw err;
           console.log("Connected successfully to server");
 
-          //Parametros de pesquisa
-          var query = {};
-          var options = {};
-          var page = 1;
+          if(all){
+            //Parametros de pesquisa
+            var query = {};
+            var options = {};
+            var page = 1;
 
-          if(parameters.page) page = parameters.page;
-          if(parameters.page <= 0) page = 1;
-          if(parameters.vaga != '') query.title = {$regex: '.*'+parameters.vaga+'.*', $options: 'i'};
-          if(parameters.cidade != 'todas') query.city = parameters.cidade;
+            if(parameters.page) page = parameters.page;
+            if(parameters.page <= 0) page = 1;
+            if(parameters.vaga != '') query.title = {$regex: '.*'+parameters.vaga+'.*', $options: 'i'};
+            if(parameters.cidade != 'todas') query.city = parameters.cidade;
 
-          //Parametros de paginação
-          page -= 1;
-          options.limit = 10;
-          options.skip = page == 0 ? page : ( page * options.limit);
+            //Parametros de paginação
+            page -= 1;
+            options.limit = 10;
+            options.skip = page == 0 ? page : ( page * options.limit );
 
-          //Resultados
-          var vacancies = { query: parameters, count: 0, data: [], pagination: [] };
+            //Resultados
+            var vacancies = { query: parameters, count: 0, data: [], pagination: [] };
 
-          //Execução da query
-          var mongo = client.db(dbName);
-          var nameCollection = process.env.DB_NAME;
+            //Execução da query
+            var mongo = client.db(dbName);
+            var nameCollection = process.env.DB_NAME;
 
-          if(parameters.cidade){
             return mongo.collection(nameCollection).find( query, options).toArray((err, result) => {
 
               if(err) throw err;
@@ -89,6 +89,15 @@ let connection = (parameters, callback) => {
               });
             });
 
+          }
+
+          if(!all){
+
+            return mongo.collection(nameCollection).findOne({config: { url: req.params.url }}).toArray((err, result) => {
+
+              if(err) throw err;
+              callback(result);
+            });
           }
       });
 }
