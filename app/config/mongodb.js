@@ -97,6 +97,7 @@ let connection = (parameters, all, callback) => {
             return mongo.collection(nameCollection).findOne({config: { url: parameters }}, (err, result) => {
 
               if(err) throw err;
+              console.log(result);
               callback(result);
             });
           }
