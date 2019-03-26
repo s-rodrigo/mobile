@@ -32,7 +32,12 @@ let connection = (parameters, all, callback) => {
 
             if(parameters.page) page = parameters.page;
             if(parameters.page <= 0) page = 1;
-            if(parameters.vaga != '') query.config.titleForSearch = {$regex: '.*'+parameters.vaga+'.*', $options: 'i'};
+            if(parameters.vaga != '') {
+              let title = parameters.vaga;
+              title = title.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+              console.log(title);
+              query.titleForSearch = {$regex: '.*'+title+'.*', $options: 'i'};
+            }
             if(parameters.cidade != 'todas') query.city = parameters.cidade;
 
             //Parametros de paginação
@@ -43,10 +48,15 @@ let connection = (parameters, all, callback) => {
             //Resultados
             var vacancies = { query: parameters, count: 0, data: [], pagination: [] };
 
-
+            console.log(query);
             return mongo.collection(nameCollection).find( query, options).toArray((err, result) => {
 
               if(err) throw err;
+              
+              result.forEach(item => {
+                item.description = item.description.substring(0,210);
+              });
+
               vacancies.data = result;
               let pagination = [];
 
@@ -97,7 +107,11 @@ let connection = (parameters, all, callback) => {
             return mongo.collection(nameCollection).findOne({ "config.url": { $eq: parameters }}, (err, result) => {
 
               if(err) throw err;
+              //TESTE
+              if(!result.benefits) result.benefits = '';
               callback(result);
+              client.close();
+              console.log('Close connection');
             });
           }
       });

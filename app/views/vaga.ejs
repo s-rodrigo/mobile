@@ -26,8 +26,8 @@
 
 							<div class="detail_title_1">
 								<h3><i class="icon-color far fa-clock"></i> 19/03/2019 19:37</h3>
-								<h1 class="icon-color "><%= title %></h1>
-								<h2><i class="icon-color fa fa-map-marker-alt"></i> <%= city %>/<%= UF %></h2>
+								<h1 class="icon-color text-uppercase"><%= title %></h1>
+								<h2><i class="icon-color fa fa-map-marker-alt"></i> <%= city %>/<%= state %></h2>
 								<div class="row">
 									<div class="col">
 										<h2><i class="icon-color fa fa-user"></i> <%= vacancies %> vaga<%= vacancies > 1 ? 's' : '' %></h2>
@@ -39,8 +39,8 @@
 								<br/>
 								<% if(pcd != 'Não'){ %>
 								<h2 class="pcd"><i class="fab fa-accessible-icon"></i> Exclusivo para PCD</h2>
-								<% } %>
 								<hr/>
+								<% } %>
 							</div>
 
 							<% if(description){ %>
@@ -54,12 +54,20 @@
 							<% } %>
 
 							<h5 class="icon-color">Salario</h5>
-							<p>R$ <%= salary %></p>
+							<p>
+							<% if(['A combinar', 'Enviar pretensão salarial'].indexOf(salary) < 0){ %> 
+								R$
+							<% } %>
+							<%= salary %>
+							</p>
 
 							<% if(benefits){ %>
 							<h5 class="icon-color">Benefícios</h5>
-							<p><%= salary %></p>
+							<p>
+							<%= benefits %>
+							</p>
 							<% } %>
+							
 
 							<% if(observation){ %>
 							<h5 class="icon-color">Observação</h5>
@@ -67,9 +75,32 @@
 							<% } %>
 
 							<h5 class="icon-color">Como se candidatar</h5>
+							<% if(candidature.type == 'email'){ %>
 							<p>
-								Os interessados deverão encaminhar o currículo aos cuidados de Maria para o e-mail selecao.1977@gmail.com com a sigla Tec. Nutrição no campo assunto até o dia 30/04/2019.
+								Os interessados deverão encaminhar o currículo aos cuidados de 
+								<strong><%= candidature.responsible %></strong> para o e-mail <strong><%= candidature.email %></strong>
+								com o assunto <strong><%= candidature.title %></strong> no campo assunto até o dia <strong><%= candidature.dateLimit %></strong>.
 							</p>
+							<% } %>
+
+							<% if(candidature.type == 'address'){ %>
+							<p>
+								Os interessados deverão comparecer ao endereço, 
+								<strong>
+									<%= candidature.address %>, <%= candidature.number %>,
+									<%= candidature.district %> - <%= candidature.city %>/<%= candidature.UF %>
+								</strong> 
+								com currículo em mãos até o dia <strong><%= candidature.dateLimit %></strong>.
+							</p>
+							<% } %>
+
+							<% if(candidature.type == 'site'){ %>
+							<p>
+								Os interessados deverão se candidatar a vaga atraves do site da empresa,
+								<strong><%= candidature.site %></strong>, código da vaga <strong><%= candidature.cod %></strong>,
+								até o dia <strong><%= candidature.dateLimit %></strong>.
+							</p>
+							<% } %>
 
 							<hr/>
 
