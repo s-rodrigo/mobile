@@ -23,7 +23,7 @@ let connection = (parameters, all, callback) => {
           //Execução da query
           var mongo = client.db(dbName);
           var nameCollection = process.env.DB_NAME;
-          
+
           if(all){
             //Parametros de pesquisa
             var query = {};
@@ -94,7 +94,7 @@ let connection = (parameters, all, callback) => {
 
           if(!all){
 
-            return mongo.collection(nameCollection).findOne({config: { url: parameters }}).toArray((err, result) => {
+            return mongo.collection(nameCollection).findOne({config: { url: parameters }}, (err, result) => {
 
               if(err) throw err;
               callback(result);
