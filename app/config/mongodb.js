@@ -93,8 +93,8 @@ let connection = (parameters, all, callback) => {
           }
 
           if(!all){
-
-            return mongo.collection(nameCollection).findOne({config: { url: parameters }}, (err, result) => {
+            console.log(parameters);
+            return mongo.collection(nameCollection).findOne({ "config.url": { $eq: parameters }}, (err, result) => {
 
               if(err) throw err;
               console.log(result);
