@@ -93,7 +93,7 @@ let connection = (parameters, all, callback) => {
 
           if(!all){
 
-            return mongo.collection(nameCollection).findOne({config: { url: req.params.url }}).toArray((err, result) => {
+            return mongo.collection(nameCollection).findOne({config: { url: parameters }}).toArray((err, result) => {
 
               if(err) throw err;
               callback(result);
