@@ -32,7 +32,7 @@ let connection = (parameters, all, callback) => {
 
             if(parameters.page) page = parameters.page;
             if(parameters.page <= 0) page = 1;
-            if(parameters.vaga != '') query.title = {$regex: '.*'+parameters.vaga+'.*', $options: 'i'};
+            if(parameters.vaga != '') query.config.titleForSearch = {$regex: '.*'+parameters.vaga+'.*', $options: 'i'};
             if(parameters.cidade != 'todas') query.city = parameters.cidade;
 
             //Parametros de paginação
@@ -97,8 +97,6 @@ let connection = (parameters, all, callback) => {
             return mongo.collection(nameCollection).findOne({ "config.url": { $eq: parameters }}, (err, result) => {
 
               if(err) throw err;
-              console.log("TESTE");
-              console.log(result);
               callback(result);
             });
           }

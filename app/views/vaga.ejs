@@ -27,42 +27,44 @@
 							<div class="detail_title_1">
 								<h3><i class="icon-color far fa-clock"></i> 19/03/2019 19:37</h3>
 								<h1 class="icon-color "><%= title %></h1>
-								<h2><i class="icon-color fa fa-map-marker-alt"></i> Santa Barbara D'Oeste</h2>
+								<h2><i class="icon-color fa fa-map-marker-alt"></i> <%= city %>/<%= UF %></h2>
 								<div class="row">
 									<div class="col">
-										<h2><i class="icon-color fa fa-user"></i> 2 vagas</h2>
+										<h2><i class="icon-color fa fa-user"></i> <%= vacancies %> vaga<%= vacancies > 1 ? 's' : '' %></h2>
 									</div>
 									<div class="col">
-										<h2><i class="icon-color fas fa-business-time"></i> Jovem Aprendiz</h2>
+										<h2><i class="icon-color fas fa-business-time"></i> <%= type %></h2>
 									</div>
 								</div>
 								<br/>
+								<% if(pcd != 'Não'){ %>
 								<h2 class="pcd"><i class="fab fa-accessible-icon"></i> Exclusivo para PCD</h2>
+								<% } %>
 								<hr/>
 							</div>
 
+							<% if(description){ %>
 							<h5 class="icon-color">Descrição</h5>
-							<p>
-								Prestam assistência nutricional coletiva na preparação de alimentos doces e salgados; planejam, organizam, administram e avaliam unidades de alimentação e nutrição; efetuam controle higiênico-sanitário; participam de programas de educação nutricional. Estruturação e gerencia de atendimento ao consumidor de alimentos produzidos no local. Atuam em conformidade ao manual de boas práticas. Trabalhar em conformidade com as normas e procedimentos técnicos e de qualidade, segurança, higiene, saúde e preservação ambiental.
-							</p>
+							<p><%= description %></p>
+							<% } %>
 
+							<% if(requirement){ %>
 							<h5 class="icon-color">Requisitos</h5>
-							<p>
-								Experiência com acompanhamento em setores de manipulação alimentos doces e salgados; planejam, organizam, administram e avaliam unidades de alimentação e nutrição; efetuam controle higiênico-sanitário; participam de programas de educação nutricional.
-							</p>
+							<p><%= requirement %></p>
+							<% } %>
 
 							<h5 class="icon-color">Salario</h5>
-							<p>R$ 1.600,00</p>
+							<p>R$ <%= salary %></p>
 
+							<% if(benefits){ %>
 							<h5 class="icon-color">Benefícios</h5>
-							<p>
-								Experiência com acompanhamento em setores de manipulação alimentos doces e salgados; planejam, organizam, administram e avaliam unidades de alimentação e nutrição; efetuam controle higiênico-sanitário; participam de programas de educação nutricional.
-							</p>
+							<p><%= salary %></p>
+							<% } %>
 
+							<% if(observation){ %>
 							<h5 class="icon-color">Observação</h5>
-							<p>
-								Experiência com acompanhamento em setores de manipulação
-							</p>
+							<p><%= observation %></p>
+							<% } %>
 
 							<h5 class="icon-color">Como se candidatar</h5>
 							<p>
