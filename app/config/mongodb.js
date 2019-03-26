@@ -20,6 +20,10 @@ let connection = (parameters, all, callback) => {
           if(err) throw err;
           console.log("Connected successfully to server");
 
+          //Execução da query
+          var mongo = client.db(dbName);
+          var nameCollection = process.env.DB_NAME;
+          
           if(all){
             //Parametros de pesquisa
             var query = {};
@@ -39,9 +43,6 @@ let connection = (parameters, all, callback) => {
             //Resultados
             var vacancies = { query: parameters, count: 0, data: [], pagination: [] };
 
-            //Execução da query
-            var mongo = client.db(dbName);
-            var nameCollection = process.env.DB_NAME;
 
             return mongo.collection(nameCollection).find( query, options).toArray((err, result) => {
 
