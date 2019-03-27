@@ -1,17 +1,47 @@
-module.exports.vacancies = function(mobile, req, res){
+module.exports.vacancies = (app, req, res) => {
 
-    let objectId = mobile.config.mongodb.ObjectId;
-    let dbName = mobile.config.mongodb.collection;
+    // SEARCH PARAMETERS
     let parameters = req.query;
+    let config = app.config.mongodb.etc;
 
-    mobile.config.mongodb.connection(parameters, true, function(result){
+    app.config.mongodb.connection()
+                      .then( client => {
+
+      let db = client.db(config.nameDb);
+      let model = new app.models.VacanciesDao(db, config);
+
+      model.filter(parameters, result => {
+
+        result.data.forEach(item => {
+          if(item.description.length <= 210) return item;
+          else return (item.description = item.description.substring(0,210) + '...');
+        });
+
+        client.close();
+        console.log('Close connection');
         res.render('vagas', result);
+      });
     });
+
+
 }
 
-module.exports.vacancySingle = function(mobile, req, res){
+module.exports.vacancySingle = function(app, req, res){
+    //URL PARAMETER
     let parameter = req.params.url;
-    mobile.config.mongodb.connection(parameter, false, function(result){
-        res.render('vaga', result);
+    let config = app.config.mongodb.etc;
+
+    app.config.mongodb.connection()
+                      .then( client => {
+
+      let db = client.db(config.nameDb);
+      let model = new app.models.VacanciesDao(db, config);
+
+      model.getVacancy(parameter, result => {
+
+      client.close();
+      console.log('Close connection');
+      res.render('vaga', result);
     });
+  });
 }
