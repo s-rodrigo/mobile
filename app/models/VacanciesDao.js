@@ -39,7 +39,7 @@ VacanciesDao.prototype.filter = function(parameters, callback){
 
     this._db.collection(this._collection).find(query).count().then( value => {
 
-      this._db.collection('searches').insertOne({ date: new Date(), results: value, parameters });
+      if(!parameters.page) this._db.collection('searches').insertOne({ date: new Date(), results: value, parameters });
 
       let diff = 4;
       let limit = options.limit;
