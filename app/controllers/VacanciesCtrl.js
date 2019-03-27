@@ -1,3 +1,6 @@
+const moment = require('moment');
+moment.locale('pt-BR');
+
 module.exports.vacancies = (app, req, res) => {
 
     // SEARCH PARAMETERS
@@ -13,6 +16,8 @@ module.exports.vacancies = (app, req, res) => {
       model.filter(parameters, result => {
 
         result.data.forEach(item => {
+          item.dateFormat = moment(moment(item.date)).fromNow();
+
           if(item.description.length <= 210) return item;
           else return (item.description = item.description.substring(0,210) + '...');
         });
@@ -39,9 +44,11 @@ module.exports.vacancySingle = function(app, req, res){
 
       model.getVacancy(parameter, result => {
 
-      client.close();
-      console.log('Close connection');
-      res.render('vaga', result);
-    });
+        client.close();
+        console.log('Close connection');
+        
+        result.dateFormat = moment(moment(result.date)).fromNow();
+        res.render('vaga', result);
+      });
   });
 }
