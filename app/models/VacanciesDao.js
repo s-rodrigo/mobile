@@ -49,7 +49,7 @@ VacanciesDao.prototype.filter = function(parameters, callback){
       $or: [
         { title: query.title },
         { description: query.title },
-        { requiriments: query.title },
+        { requirement: query.title },
       ],
       $or: [ { city: query.city }, { city:'teste' }]
     }] };
@@ -59,7 +59,7 @@ VacanciesDao.prototype.filter = function(parameters, callback){
     search = { $or: [
       { title: query.title },
       { description: query.title },
-      { requiriments: query.title },
+      { requirement: query.title },
     ]};
   }
   
