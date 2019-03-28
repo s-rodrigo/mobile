@@ -7,18 +7,70 @@ function VacanciesDao(conn, config) {
 //SEARCH WITH PAGINATION
 VacanciesDao.prototype.filter = function(parameters, callback){
 
+  let alfabeto = {
+    'a':'aÁÂÃÄÅÆàáâãäåæ',
+    'c':'cç',
+    'e':'eÉÊË?èéêë?',
+    'i':'iÍÎÏ?ìíîï?',
+    'ç':'çc',
+    'n':'nñ',
+    'o':'o?ÒÓÔÕÖØðòóôõöø',
+    's':'s?ß',
+    'u':'uÙÚÛÜùúûü',
+    'y':'y¥Ýýÿ',
+    'z':'z?'
+  };
+
   //SEARCH PARAMETERS
   let query = {};
+  let search = {};
   let page = 1;
 
   if(parameters.page && parameters.page > 0) page = parameters.page;
 
   if(parameters.vaga != '') {
-    let text = parameters.vaga.normalize('NFD').replace(/[\u0300-\u036f]/g, "").trim();
-    query.titleForSearch = { $regex: '.*' + text + '.*', $options: 'i' };
+    let title = parameters.vaga.normalize('NFD').replace(/[\u0300-\u036f]/g, "").trim();
+    let nameSplit = title.split('');
+    let text = '';
+
+    nameSplit.forEach(item => {
+        if(alfabeto[item]) text += '['+alfabeto[item]+']';
+        else text += item;
+    });
+
+    text = '.*' + text + '.*';
+    query.title = { $regex: text , $options: 'i' };
   }
 
   if(parameters.cidade != 'todas') query.city = parameters.cidade;
+
+  if(query.title && query.city){
+    search = { $and: [{
+      $or: [
+        { title: query.title },
+        { description: query.title },
+        { requiriments: query.title },
+      ],
+      $or: [ { city: query.city }, { city:'teste' }]
+    }] };
+  }
+  
+  if(query.title && !query.city){
+    search = { $or: [
+      { title: query.title },
+      { description: query.title },
+      { requiriments: query.title },
+    ]};
+  }
+  
+  if(!query.title && query.city){
+    search = { city: query.city };
+  }
+  
+  if(!query.title && !query.city){
+    search = {};
+  }
+  console.log(search);
 
   //PAGINATION PARAMETERS
   let options = {};
@@ -30,14 +82,14 @@ VacanciesDao.prototype.filter = function(parameters, callback){
   let vacancies = { query: parameters, count: 0, data: [], pagination: [] };
 
   return this._db.collection(this._collection)
-                  .find( query, options )
+                  .find( search, options )
                         .toArray((err, result) => {
-
+    console.log(result.length);
     if(err) throw err;
 
     vacancies.data = result;
-
-    this._db.collection(this._collection).find(query).count().then( value => {
+    //console.log(result);
+    this._db.collection(this._collection).find(search).count().then( value => {
 
       if(!parameters.page) this._db.collection('searches').insertOne({ date: new Date(), results: value, parameters });
 
