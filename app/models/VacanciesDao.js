@@ -67,7 +67,7 @@ VacanciesDao.prototype.filter = function(parameters, callback){
         { description: query.title },
         { requirement: query.title },
       ]},
-      { city: query.city }, { city:'teste' }
+      { city: query.city }
     ] };
   }
   console.log(search);
