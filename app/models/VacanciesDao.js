@@ -43,17 +43,6 @@ VacanciesDao.prototype.filter = function(parameters, callback){
   }
 
   if(parameters.cidade != 'todas') query.city = parameters.cidade;
-
-  if(query.title && query.city){
-    search = { $and: [{
-      $or: [
-        { title: query.title },
-        { description: query.title },
-        { requirement: query.title },
-      ],
-      $or: [ { city: query.city }, { city:'teste' }]
-    }] };
-  }
   
   if(query.title && !query.city){
     search = { $or: [
@@ -69,6 +58,17 @@ VacanciesDao.prototype.filter = function(parameters, callback){
   
   if(!query.title && !query.city){
     search = {};
+  }
+
+  if(query.title && query.city){
+    search = { $and: [{
+      $or: [
+        { title: query.title },
+        { description: query.title },
+        { requirement: query.title },
+      ],
+      $or: [ { city: query.city }, { city:'teste' }]
+    }] };
   }
   console.log(search);
 
